@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sum-job
+spec:
+  parallelism: 10         # 同時に実行するポッドの数
+  completions: 10          # 完了するポッドの数
+  completionMode: Indexed  # インデックス付きの完了モード
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: sum
+        image: kawaeeeee/my-sum-image:latest
+        command:
+        - "/bin/sh"
+        - "-c"
+        - |
+          START=$(( (JOB_COMPLETION_INDEX * 100) + 1 ))
+          END=$(( (JOB_COMPLETION_INDEX + 1) * 100 ))
+          python /sum.py $START $END
+        env:
+        - name: JOB_COMPLETION_INDEX
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.annotations['batch.kubernetes.io/job-completion-index']

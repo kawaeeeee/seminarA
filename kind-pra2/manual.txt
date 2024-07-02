@@ -1,0 +1,26 @@
+1: imageのbuild
+docker build -t kawaeeeee/my-producer-image -f producer_Dockerfile .
+docker build -t kawaeeeee/my-consumer-image -f consumer_Dockerfile .
+
+2: imageのpush
+docker push kawaeeeee/my-producer-image:latest
+docker push kawaeeeee/my-consumer-image:latest
+
+3: kindのクラスタ構築
+kind create cluster --config kind-config.yaml
+
+4:Kubernetesリソースを適用
+kubectl apply -f producer-deployment.yaml
+kubectl apply -f producer-service.yaml
+kubectl apply -f consumer-deployment.yaml
+
+5:logの確認
+kubectl logs <producer pod name>
+
+6:clusterの削除
+kind delete cluster
+
+
+
+ff: buckupを取るとき
+cp consumer_Dockerfile producer-service.yaml kind-config.yaml producer.py consumer-deployment.yaml manual.txt producer_Dockerfile consumer.py producer-deployment.yaml buckup2/

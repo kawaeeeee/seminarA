@@ -1,0 +1,7 @@
+1: imageのbuild
+docker build -t kawaeeeee/my-producer-image -f producer_Dockerfile .
+docker build -t kawaeeeee/my-consumer-image -f consumer_Dockerfile .
+
+2: imageのpush
+docker push kawaeeeee/my-producer-image:latest
+docker push kawaeeeee/my-consumer-image:latest

@@ -1,0 +1,27 @@
+1: Kind クラスタの作成
+kind create cluster --config kind-config.yaml
+
+2:クラスタの確認
+kubectl get nodes
+
+
+3:docker imageの作成　　始めだけいる　みんなが実行するときは省略して
+docker build -t my-sum-image .
+
+4:docker imageをdocker hubにpush 始めだけいる　みんなが実行するときは省略して
+docker tag my-sum-image username/my-sum-image:latest
+docker push username/my-sum-image:latest
+
+5:Job のデプロイ
+kubectl apply -f sum-job.yaml
+
+6:ジョブのステータス確認
+kubectl get jobs
+
+7：ポッドの確認
+kubectl get pods
+
+8: ログの確認　　podによって1~100の和とか101~200の和とかが出力される
+kubectl logs <pod-name>
+
+
