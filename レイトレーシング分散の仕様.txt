@@ -1,0 +1,29 @@
+レイトレーシング分散の仕様
+サーバー・クライアント型のシステム
+tcpで通信する。
+サーバー = producer
+クライアント= worker
+producer 1台
+worker 複数台
+
+producerがworkerに計算範囲を命令する。
+workerは命令された計算範囲を計算し、計算が終わると計算結果をproducerに送信。
+
+
+通信の手順
+1. worker pod 起動時に workerはproducerとTCPコネクション確立
+
+2. workerは計算可能である場合、producerに1バイトの'R'を送信(ready信号)
+
+3. producerは、1バイトの'R'を送信してきたworkerに計算範囲を送信。
+送信する計算範囲の優先度は　未割り振り＞割り振り済みand結果がまだ
+すべての計算範囲が計算済みの場合,workerに1バイトの'F'を送信
+
+4. workerは計算範囲の受信後、計算をする。
+計算終了後、producerに計算結果を送信。
+
+5. workerは結果の送信後、計算可能になれば再び、producerに'R'を送信。
+
+6. workerが'F'を受け取るとworkerはTCPコネクションを終了し、プログラムを終了する。
+
+7. producerはすべての計算範囲が計算済みの場合、結果を統合して画像を出力。
