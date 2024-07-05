@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: consumer
+spec:
+  completions: 10
+  parallelism: 10
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - name: consumer
+        image: kawaeeeee/my-consumer-image2:latest
+      restartPolicy: OnFailure
+
+
+
+

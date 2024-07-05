@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: producer
+spec:
+  completions: 1
+  parallelism: 1
+  template:
+    metadata:
+      labels:
+        app: producer
+    spec:
+      containers:
+      - name: producer
+        image: kawaeeeee/my-producer-image2:latest
+        ports:
+        - containerPort: 9999
+      restartPolicy: OnFailure
+
+
+

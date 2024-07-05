@@ -1,3 +1,4 @@
 FROM python:3.8-slim
 COPY consumer.py /consumer.py
 ENTRYPOINT ["python", "/consumer.py"]
+CMD ["tail", "-f", "/dev/null"]
