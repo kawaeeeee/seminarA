@@ -1,0 +1,4 @@
+FROM python:3.8-slim
+COPY producer.py /producer.py
+CMD ["python", "/producer.py"]
+ENTRYPOINT ["sh", "-c", "python /producer.py && tail -f /dev/null"]
