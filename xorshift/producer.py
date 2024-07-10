@@ -49,12 +49,12 @@ def handle_worker(conn):
                     seed, rand = map(int, data.split(','))
                     result = Result(seed, rand)
                     with lock:
-                        print(f"seed: {result.seed}")
-                        print(f"rand: {result.rand}")
+                        #print(f"seed: {result.seed}")
+                        #print(f"rand: {result.rand}")
                         results.append(result)
                         if len(results) == 10:
-                            print("receive all results")
-                            print("all tasks done")
+                            #print("receive all results")
+                            #print("all tasks done")
                             all_tasks_done.set()
     except Exception as e:
         print(f"Error handling worker: {e}")
@@ -69,11 +69,11 @@ def compute_rand(results):
     return random_number
 
 def main():
-    print('Program start')
+    #print('Program start')
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(('0.0.0.0', 8081))
     server.listen(5)
-    print('Producer is running...')
+    #print('Producer is running...')
 
     selector = selectors.DefaultSelector()
     selector.register(server, selectors.EVENT_READ)
@@ -85,18 +85,22 @@ def main():
             for key, mask in events:
                 if key.fileobj == server:
                     # 新しい接続がある場合
-                    print("before accept")
                     conn, addr = server.accept()
-                    print(f'Connected by {addr}')
+                    #print(f'Connected by {addr}')
                     threading.Thread(target=handle_worker, args=(conn,)).start()
     finally:
         server.close()
 
-    print("All ranges computed, finalizing results...")
+    #print("All ranges computed, finalizing results...")
 
     # 結果を統合
     total_rand = compute_rand(results)
     print(f"Total Sum: {total_rand}")
+
+
+    end_time = time.time()
+
+    print(f"execution time {end_time - now_time}")
 
     # サーバー終了後の処理を続けるためのループ
     # while True:
