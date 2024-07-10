@@ -16,7 +16,7 @@ spec:
       - name: producer
         image: kawaeeeee/my-producer-image2:latest
         ports:
-        - containerPort: 9999
+        - containerPort: 8081
 
 
 

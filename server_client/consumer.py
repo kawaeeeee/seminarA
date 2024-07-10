@@ -1,12 +1,13 @@
 import socket
 import struct
+import time
 
 def compute_sum(start, end):
     return sum(range(start, end + 1))
 
 def main():
     producer_ip = 'producer'
-    producer_port = 9999
+    producer_port = 8081
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((producer_ip, producer_port))
     print('Connected to producer')
@@ -27,6 +28,10 @@ def main():
         print(f"Sent result: start={start}, end={end}, sum={result_sum}")
     
     client.close()
+
+    # condition = True
+    # while condition:
+    #     time.sleep(5)
 
 if __name__ == '__main__':
     main()
