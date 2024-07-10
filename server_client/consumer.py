@@ -1,8 +1,11 @@
 import socket
 import struct
 
-def compute_sum(start, end):
-    return sum(range(start, end + 1))
+def xorshift(seed):
+    seed = seed ^ (seed << 13 & 0xFFFFFFFF)
+    seed = seed ^ (seed >> 17 & 0xFFFFFFFF)
+    seed = seed ^ (seed << 5 & 0xFFFFFFFF)
+    return seed & 0xFFFFFFFF
 
 def main():
     producer_ip = 'producer'
@@ -17,14 +20,14 @@ def main():
         data = client.recv(length).decode()
         if data == 'F':
             break
-        start, end = map(int, data.split(','))
-        print(f"Received range: start={start}, end={end}")
+        seed = int(data)
+        print(f"Received seed: seed={seed}")
         
-        result_sum = compute_sum(start, end)
-        data = f'{start},{end},{result_sum}'.encode()
+        result_rand = xorshift(seed)
+        data = f'{seed},{result_rand}'.encode()
         client.sendall(b'S')
         client.sendall(struct.pack('!I', len(data)) + data)  # 先にデータの長さを送る
-        print(f"Sent result: start={start}, end={end}, sum={result_sum}")
+        print(f"Sent result: seed={seed}, random number={result_rand}")
     
     client.close()
 

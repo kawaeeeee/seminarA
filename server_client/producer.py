@@ -1,54 +1,56 @@
 import socket
 import threading
+import time
 from queue import Queue
 import struct
 
-# 計算範囲
-class Range:
-    def __init__(self, start, end):
-        self.start = start
-        self.end = end
-
 # 計算結果
 class Result:
-    def __init__(self, start, end, sum):
-        self.start = start
-        self.end = end
-        self.sum = sum
+    def __init__(self, seed, rand):
+        self.seed = seed
+        self.rand = rand
 
 # グローバル変数
-ranges = Queue()
+seeds = Queue()
 results = []
 lock = threading.Lock()
 all_tasks_done = threading.Event()
+now_time = int(time.time())
 
 # 計算範囲をキューに追加
-for i in range(1, 10001, 100):
-    ranges.put(Range(i, i + 99))
+for i in range(10):
+    seeds.put(now_time + i)
 
 def handle_worker(conn):
     while True:
         ready_signal = conn.recv(1).decode()
         if ready_signal == 'R':
             with lock:
-                if ranges.empty():
+                if seeds.empty():
                     conn.sendall(b'F')
                     conn.close()
                     break
-                range_to_compute = ranges.get()
-            data = f'{range_to_compute.start},{range_to_compute.end}'.encode()
+                seed = seeds.get()
+            data = f'{seed}'.encode()
             conn.sendall(struct.pack('!I', len(data)) + data)  # 先にデータの長さを送る
             
             completion_signal = conn.recv(1).decode()
             if completion_signal == 'S':
                 length = struct.unpack('!I', conn.recv(4))[0]
                 data = conn.recv(length).decode()
-                start, end, sum = map(int, data.split(','))
-                result = Result(start, end, sum)
+                seed, rand = map(int, data.split(','))
+                result = Result(seed, rand)
                 with lock:
                     results.append(result)
-                    if ranges.empty():
+                    if seeds.empty():
                         all_tasks_done.set()
+
+def compute_rand(results):
+    random_number = 0
+    for result in results:
+        random_number = random_number * 10 ** 32
+        random_number += result.rand
+    return random_number
 
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -62,11 +64,11 @@ def main():
         threading.Thread(target=handle_worker, args=(conn,)).start()
 
     server.close()
-    print("All ranges computed, finalizing results...")
+    print("All random number computed, finalizing results...")
 
     # 結果を統合
-    total_sum = sum([result.sum for result in results])
-    print(f"Total Sum: {total_sum}")
+    total_rand = compute_rand(results)
+    print(f"Computed random number: {total_rand}")
     
     
 
