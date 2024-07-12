@@ -17,7 +17,11 @@ kubectl apply -f consumer-deployment.yaml
 5:logの確認
 kubectl logs <producer pod name>
 
-6:clusterの削除
+6: imageをローカルにコピー
+kubectl cp producer-54d9b5dd79-lddcg:/image.ppm ./image.ppm
+
+
+7:clusterの削除
 kind delete cluster
 
 
