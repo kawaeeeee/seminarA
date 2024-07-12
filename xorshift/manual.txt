@@ -51,6 +51,6 @@ kubectl delete namespace my-namespace
 
 sh
 Copy code
-kubectl delete all --al
+kubectl delete all --all
 
 

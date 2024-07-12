@@ -77,3 +77,28 @@ Traceback (most recent call last):
   File "/consumer.py", line 17, in main
     client.connect((producer_ip, producer_port))
 ConnectionRefusedError: [Errno 111] Connection refused
+
+
+
+hiroki_kawai@DESKTOP-VHNHE0K:~/docker/seminarA/seminarA/xorshift$ kubectl apply -f producer-deployment.yaml
+kubectl apply -f producer-service.yaml
+kubectl apply -f consumer-deployment.yaml
+deployment.apps/producer created
+service/producer created
+deployment.apps/consumer created
+hiroki_kawai@DESKTOP-VHNHE0K:~/docker/seminarA/seminarA/xorshift$ kubectl get pods                         
+NAME                        READY   STATUS    RESTARTS   AGE
+consumer-5d7756ddd4-2m4pp   1/1     Running   0          3m15s
+consumer-5d7756ddd4-4d6rb   1/1     Running   0          3m15s
+consumer-5d7756ddd4-9mv6x   1/1     Running   0          3m15s
+consumer-5d7756ddd4-9n8j7   1/1     Running   0          3m15s
+consumer-5d7756ddd4-d7tvm   1/1     Running   0          3m15s
+consumer-5d7756ddd4-dgqf9   1/1     Running   0          3m15s
+consumer-5d7756ddd4-j99jv   1/1     Running   0          3m15s
+consumer-5d7756ddd4-kb6hk   1/1     Running   0          3m15s
+consumer-5d7756ddd4-m85dr   1/1     Running   0          3m15s
+consumer-5d7756ddd4-wwr89   1/1     Running   0          3m15s
+producer-5695cdf87d-2vhf9   1/1     Running   0          3m16s
+hiroki_kawai@DESKTOP-VHNHE0K:~/docker/seminarA/seminarA/xorshift$ kubectl logs producer-5695cdf87d-2vhf9
+Total Sum: 794494056647039006275099018011485523665774475751582162439021859101642938256604413476384570839874
+execution time 24.187304258346558
