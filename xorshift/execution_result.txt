@@ -86,6 +86,9 @@ kubectl apply -f consumer-deployment.yaml
 deployment.apps/producer created
 service/producer created
 deployment.apps/consumer created
+
+
+//  分散処理したときの結果(パソコン上)
 hiroki_kawai@DESKTOP-VHNHE0K:~/docker/seminarA/seminarA/xorshift$ kubectl get pods                         
 NAME                        READY   STATUS    RESTARTS   AGE
 consumer-5d7756ddd4-2m4pp   1/1     Running   0          3m15s
@@ -99,6 +102,16 @@ consumer-5d7756ddd4-kb6hk   1/1     Running   0          3m15s
 consumer-5d7756ddd4-m85dr   1/1     Running   0          3m15s
 consumer-5d7756ddd4-wwr89   1/1     Running   0          3m15s
 producer-5695cdf87d-2vhf9   1/1     Running   0          3m16s
-hiroki_kawai@DESKTOP-VHNHE0K:~/docker/seminarA/seminarA/xorshift$ kubectl logs producer-5695cdf87d-2vhf9
-Total Sum: 794494056647039006275099018011485523665774475751582162439021859101642938256604413476384570839874
-execution time 24.187304258346558
+
+hiroki_kawai@DESKTOP-VHNHE0K:~/docker/seminarA/seminarA/xorshift$ kubectl logs producer-5695cdf87d-xpm9h
+Total Sum: 893003416619649854920295878230229843893993045667539080736138909077343563369178738708972269796481
+execution time 20.505688905715942
+
+//　分散しないで実行した結果(xorshift.py)
+PS C:\Users\hirokikawai\OneDrive - OUMail (Osaka University)\3年\情報科学ゼミナールA> python xorshift.py
+Total Sum: 1428344478803758256629073382517977418969705261135793290614683587405121637351090690270851276516263
+execution time 47.28433656692505
+
+
+
+
