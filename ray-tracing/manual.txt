@@ -1,0 +1,56 @@
+1: imageのbuild
+docker build -t kawaeeeee/my-producer-rayt -f producer_Dockerfile .
+docker build -t kawaeeeee/my-consumer-rayt -f consumer_Dockerfile .
+
+2: imageのpush
+docker push kawaeeeee/my-producer-rayt:latest
+docker push kawaeeeee/my-consumer-rayt:latest
+
+3: kindのクラスタ構築
+kind create cluster --config kind-config.yaml
+
+4:Kubernetesリソースを適用
+kubectl apply -f producer-deployment.yaml
+kubectl apply -f producer-service.yaml
+kubectl apply -f consumer-deployment.yaml
+
+5:logの確認
+kubectl logs <producer pod name>
+
+6:clusterの削除
+kind delete cluster
+
+
+podの中に入る
+ kubectl exec -it producer-746496c94d-d4fvw  -- /bin/bash
+
+ kubectl describe pod producer-746496c94d-xh827
+
+
+
+ YAMLファイルから削除する場合:
+リソースを作成した時と同じYAMLファイルを使って削除できます。例えば、my-resources.yamlというYAMLファイルを使ってリソースを作成した場合、次のコマンドでそのリソースを削除できます。
+
+sh
+Copy code
+kubectl delete -f my-resources.yaml
+特定のリソースを削除する場合:
+リソースの種類（Pod、Deployment、Serviceなど）と名前を指定して削除することもできます。例えば、my-deploymentという名前のDeploymentを削除する場合、次のようにします。
+
+sh
+Copy code
+kubectl delete deployment my-deployment
+名前空間全体を削除する場合:
+名前空間全体を削除すると、その名前空間に含まれるすべてのリソースが削除されます。例えば、my-namespaceという名前空間を削除する場合、次のコマンドを使用します。
+
+sh
+Copy code
+kubectl delete namespace my-namespace
+すべてのリソースを削除する場合:
+現在のコンテキストで実行中のすべてのリソースを削除するには、次のコマンドを使用します。
+
+sh
+Copy code
+kubectl delete all --all
+
+

@@ -60,7 +60,6 @@ def handle_worker(conn):
         print(f"Error handling worker: {e}")
     finally:
         conn.close()
-        conn.close()
 
 def compute_rand(results):
     random_number = 0
@@ -102,9 +101,7 @@ def main():
 
     print(f"execution time {end_time - now_time}")
 
-    # サーバー終了後の処理を続けるためのループ
-    # while True:
-    #     time.sleep(5)
+
 
 if __name__ == '__main__':
     main()
