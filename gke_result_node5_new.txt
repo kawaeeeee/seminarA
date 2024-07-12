@@ -1,0 +1,48 @@
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\xorshift>gcloud container clusters resize cluster-1 --size=5 --region=us-central1-a
+WARNING: The --size flag is now deprecated. Please use `--num-nodes` instead.
+Pool [default-pool] for [cluster-1] will be resized to 5 node(s) in each zone it spans.
+
+Do you want to continue (Y/n)?  y
+
+Resizing cluster-1...done.
+Updated [https://container.googleapis.com/v1/projects/seminara/zones/us-central1-a/clusters/cluster-1].
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\xorshift>kubectl apply -f consumer-deployment.yaml
+deployment.apps/consumer created
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\xorshift>kubectl get pods
+NAME                        READY   STATUS    RESTARTS   AGE
+consumer-64b77dccc5-7qf6x   1/1     Running   0          21s
+consumer-64b77dccc5-8q4wv   1/1     Running   0          22s
+consumer-64b77dccc5-crskb   1/1     Running   0          21s
+consumer-64b77dccc5-hzfcz   1/1     Running   0          22s
+consumer-64b77dccc5-p6tj5   1/1     Running   0          22s
+consumer-64b77dccc5-qfrzl   1/1     Running   0          22s
+consumer-64b77dccc5-rdcv8   1/1     Running   0          22s
+consumer-64b77dccc5-tkbbd   1/1     Running   0          22s
+consumer-64b77dccc5-vhgqq   1/1     Running   0          22s
+consumer-64b77dccc5-z8c4q   1/1     Running   0          22s
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\xorshift>kubectl apply -f producer-service.yaml
+service/producer created
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\xorshift>kubectl apply -f producer-deployment.yaml
+deployment.apps/producer created
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\xorshift>kubectl get pods
+NAME                        READY   STATUS    RESTARTS   AGE
+consumer-64b77dccc5-7qf6x   1/1     Running   0          53s
+consumer-64b77dccc5-8q4wv   1/1     Running   0          54s
+consumer-64b77dccc5-crskb   1/1     Running   0          53s
+consumer-64b77dccc5-hzfcz   1/1     Running   0          54s
+consumer-64b77dccc5-p6tj5   1/1     Running   0          54s
+consumer-64b77dccc5-qfrzl   1/1     Running   0          54s
+consumer-64b77dccc5-rdcv8   1/1     Running   0          54s
+consumer-64b77dccc5-tkbbd   1/1     Running   0          54s
+consumer-64b77dccc5-vhgqq   1/1     Running   0          54s
+consumer-64b77dccc5-z8c4q   1/1     Running   0          54s
+producer-65d585b58f-86vgf   1/1     Running   0          9s
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\xorshift>kubectl logs producer-65d585b58f-86vgf
+Total Sum: 640517879018588444156937407523617401361101832269804716737847319770353419492754803775347666900385
+execution time 24.399954080581665
