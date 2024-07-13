@@ -40,6 +40,22 @@ def main():
 				except UnicodeDecodeError:
 					pass
 				"""
+
+				# # rowを文字列としてエンコード
+				# row_str = f'{row},'.encode()
+                # # ppmデータを取得
+				# ppm_data = ppm_maker.get_ppm_line(width, height, samples, supersamples, row)
+				# ppm_data_str = str(ppm_data)
+				# print(f"{ppm_data}")
+				# ppm_data_bytes = ppm_data_str.encode()
+				
+
+                # # バイト列として結合
+				# send_data = row_str + ppm_data_bytes
+
+				# client.sendall(b'S')
+				# client.sendall(struct.pack('!I', len(send_data)) + send_data)  # 送信
+				# print(f"Sent result: row={row}")
 				send_data = f'{row},{ppm_maker.get_ppm_line(width,height,samples,supersamples,row)}'.encode()
 				client.sendall(b'S')
 				client.sendall(struct.pack('!I', len(send_data)) + send_data) #送信

@@ -31,3 +31,31 @@ Traceback (most recent call last):
   File "/consumer.py", line 59, in main
     send_data = f'{row},{ppm_maker.get_ppm_line(width,height,samples,supersamples,row)}'.encode()
 UnicodeDecodeError: 'utf-8' codec can't decode byte 0xaa in position 2: invalid start byte
+
+kubectl get pods
+NAME                        READY   STATUS             RESTARTS      AGE
+consumer-7679d7fbcc-8hq9c   0/1     CrashLoopBackOff   1 (5s ago)    14s
+consumer-7679d7fbcc-9fknv   0/1     Error              0             14s
+consumer-7679d7fbcc-dbxw8   1/1     Running            0             14s
+consumer-7679d7fbcc-fpf9s   0/1     CrashLoopBackOff   1 (3s ago)    14s
+consumer-7679d7fbcc-j8mtc   1/1     Running            0             14s
+consumer-7679d7fbcc-kkms7   0/1     Error              1 (7s ago)    14s
+consumer-7679d7fbcc-mhn7n   1/1     Running            0             14s
+consumer-7679d7fbcc-qbmzl   0/1     CrashLoopBackOff   1 (3s ago)    14s
+consumer-7679d7fbcc-t8z2k   1/1     Running            1 (7s ago)    14s
+consumer-7679d7fbcc-wlnwc   1/1     Running            1 (10s ago)   14s
+producer-54d9b5dd79-kxndx   1/1     Running            0             14s
+hiroki_kawai@DESKTOP-VHNHE0K:~/docker/seminarA/seminarA/ray-tracing$ kubectl logs consumer-7679d7fbcc-kkms7
+row:256
+Sent result: row=256
+row:259
+Sent result: row=259
+row:261
+Traceback (most recent call last):
+  File "/consumer.py", line 60, in <module>
+    main()
+  File "/consumer.py", line 43, in main
+    send_data = f'{row},{ppm_maker.get_ppm_line(width,height,samples,supersamples,row)}'.encode()
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe0 in position 0: invalid continuation byte
+hiroki_kawai@DESKTOP-VHNHE0K:~/docker/seminarA/seminarA/ray-tracing$ kubectl logs producer-54d9b5dd79-kxndx
+execution time 13.989951133728027
