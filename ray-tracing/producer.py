@@ -18,6 +18,15 @@ lock = threading.Lock() #セマフォ
 all_tasks_done = threading.Event() #シグナリング
 start_time = time.time() #開始時間
 
+def data_check(s):
+	#データに不足がないか判定
+	parts = s.split()
+	count = sum(1 for part in parts if part.isdigit())
+	if count == (width * 3):
+		return True
+	else:
+		return False
+
 def create_ppm():
 	with open("image.ppm", 'w') as f:
 		# PPM header
@@ -57,12 +66,13 @@ def handle_worker(conn):
 					first_part, separator, second_part = recv_data.partition(",")
 					cul_row = int(first_part)
 					rgb_string = second_part
-					with lock:
-						allocated_tasks.discard(cul_row)
-						finished_tasks.put(cul_row)
-						results[cul_row]=rgb_string
-						if finished_tasks.qsize() == height:
-							all_tasks_done.set()
+					if data_check(rgb_string):
+						with lock:
+							allocated_tasks.discard(cul_row)
+							finished_tasks.put(cul_row)
+							results[cul_row]=rgb_string
+							if finished_tasks.qsize() == height:
+								all_tasks_done.set()
 	except Exception as e:
 		print(f"Error handling worker: {e}")
 	finally:
