@@ -9,7 +9,7 @@ sampleとsupersamples
 """
 width = 640
 height = 480
-samples = 5
+samples = 256
 supersamples = 2
 
 def main():
