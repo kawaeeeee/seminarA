@@ -15,7 +15,8 @@ kubectl apply -f producer-service.yaml
 kubectl apply -f consumer-deployment.yaml
 
 5:logの確認
-kubectl logs <producer pod name>
+kubectl get pods
+kubectl logs -f <producer pod name>
 
 6: imageをローカルにコピー
 kubectl cp producer-54d9b5dd79-lddcg:/image.ppm ./image.ppm

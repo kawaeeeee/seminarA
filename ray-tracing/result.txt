@@ -1,0 +1,25 @@
+07150355
+kubectl logs -f producer-54d9b5dd79-k4k48
+execution time 163.4970350265503
+exit
+^C
+
+sample=256
+================================================
+07150440
+kubectl get pods        
+NAME                        READY   STATUS    RESTARTS   AGE
+consumer-7679d7fbcc-287xt   1/1     Running   0          16s
+consumer-7679d7fbcc-48fj4   1/1     Running   0          16s
+consumer-7679d7fbcc-669qc   1/1     Running   0          16s
+consumer-7679d7fbcc-6bbw4   1/1     Running   0          16s
+consumer-7679d7fbcc-7hcrc   1/1     Running   0          16s
+consumer-7679d7fbcc-9b2cf   1/1     Running   0          16s
+consumer-7679d7fbcc-gzjxw   1/1     Running   0          16s
+consumer-7679d7fbcc-h8sqn   1/1     Running   0          16s
+consumer-7679d7fbcc-kftrc   1/1     Running   0          16s
+consumer-7679d7fbcc-ssk4v   1/1     Running   0          16s
+producer-54d9b5dd79-z7wg5   1/1     Running   0          17s
+hiroki_kawai@DESKTOP-VHNHE0K:~/docker/seminarA/seminarA/ray-tracing$ kubectl logs -f producer-54d9b5dd79-z7wg5
+execution time 624.651269197464
+
