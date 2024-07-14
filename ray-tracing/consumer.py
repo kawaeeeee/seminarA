@@ -31,6 +31,7 @@ def main():
 				length = struct.unpack('!I', client.recv(4))[0]  # データの長さを受信
 				recv_data = client.recv(length).decode()
 				if recv_data == 'F':
+					print("receive finish signal")
 					break
 				row = int(recv_data)
 				print(f"row:{row}")
@@ -40,7 +41,15 @@ def main():
 				except UnicodeDecodeError:
 					pass
 				"""
+
 				send_data = f'{row},{ppm_maker.get_ppm_line(width,height,samples,supersamples,row)}'.encode()
+				# while True:
+				# 	try:	
+				# 		send_data = f'{row},{ppm_maker.get_ppm_line(width,height,samples,supersamples,row)}'.encode()
+				# 		break
+				# 	except Exception as e:
+				# 		print(f"error occurred row {row}: {e}, retrying...")
+				
 				client.sendall(b'S')
 				client.sendall(struct.pack('!I', len(send_data)) + send_data) #送信
 				print(f"Sent result: row={row}")

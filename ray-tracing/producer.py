@@ -11,7 +11,7 @@ height = 480
 # グローバル変数
 tasks = Queue() #未割当の行
 allocated_tasks = set() #割当済みだけど計算まだの行(集合で管理)
-finished_tasks = Queue() #計算終わった行
+finished_tasks = set() #計算終わった行
 results = dict()
 
 lock = threading.Lock() #セマフォ
@@ -53,6 +53,7 @@ def handle_worker(conn):
 						allocated_tasks.add(row)
 					else:
 						row = allocated_tasks.pop()
+						allocated_tasks.add(row)
 				send_data = f'{row}'.encode()
 				conn.sendall(struct.pack('!I', len(send_data)) + send_data)  # 先にデータの長さを送る
 				
@@ -69,9 +70,9 @@ def handle_worker(conn):
 					if data_check(rgb_string):
 						with lock:
 							allocated_tasks.discard(cul_row)
-							finished_tasks.put(cul_row)
+							finished_tasks.add(cul_row)
 							results[cul_row]=rgb_string
-							if finished_tasks.qsize() == height:
+							if len(finished_tasks) == height:
 								all_tasks_done.set()
 	except Exception as e:
 		print(f"Error handling worker: {e}")
