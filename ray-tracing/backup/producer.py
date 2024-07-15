@@ -69,8 +69,6 @@ def handle_worker(conn):
 					rgb_string = second_part
 					if data_check(rgb_string):
 						with lock:
-							with open("log.txt",'a') as f:
-								f.write(f"receive row :{cul_row}\n")
 							allocated_tasks.discard(cul_row)
 							finished_tasks.add(cul_row)
 							results[cul_row]=rgb_string

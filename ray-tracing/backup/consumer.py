@@ -31,13 +31,9 @@ def main():
 				length = struct.unpack('!I', client.recv(4))[0]  # データの長さを受信
 				recv_data = client.recv(length).decode()
 				if recv_data == 'F':
-					with open("log.txt",'a') as f:
-						f.write("receive finish signal\n")
 					print("receive finish signal")
 					break
 				row = int(recv_data)
-				with open("log.txt",'a') as f:
-					f.write(f"row: {row}")
 				print(f"row:{row}")
 				"""
 				try:
@@ -56,8 +52,6 @@ def main():
 				
 				client.sendall(b'S')
 				client.sendall(struct.pack('!I', len(send_data)) + send_data) #送信
-				with open("log.txt",'a') as f:
-					f.write(f"Sent result: row={row}\n")
 				print(f"Sent result: row={row}")
 			break
 
