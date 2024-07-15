@@ -101,6 +101,8 @@ def main():
 				if key.fileobj == server:
 					# 新しい接続がある場合
 					conn, addr = server.accept()
+					with open("log2.txt",'a') as f2:
+						f2.write(f"acccept by {addr}\n")
 					threading.Thread(target=handle_worker, args=(conn,)).start()
 	finally:
 		server.close()
