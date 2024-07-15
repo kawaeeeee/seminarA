@@ -109,7 +109,8 @@ def main():
 
 	# 結果をファイルに出力
 	create_ppm()
-
+	with open("log2.txt",'a') as f2:
+		f2.write(f"execution time {time.time() - start_time}\n")
 	print(f"execution time {time.time() - start_time}") # 終了時刻の出力
 
 if __name__ == '__main__':
