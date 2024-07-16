@@ -22,4 +22,12 @@ consumer-7679d7fbcc-ssk4v   1/1     Running   0          16s
 producer-54d9b5dd79-z7wg5   1/1     Running   0          17s
 hiroki_kawai@DESKTOP-VHNHE0K:~/docker/seminarA/seminarA/ray-tracing$ kubectl logs -f producer-54d9b5dd79-z7wg5
 execution time 624.651269197464
+sample=1000
+================================================================
+07161310
+kubectl logs -f producer-54d9b5dd79-fmlh9
+execution time 611.7083020210266
+^C
+hiroki_kawai@DESKTOP-VHNHE0K:~/docker/seminarA/seminarA/ray-tracing$ kubectl cp producer-54d9b5dd79-fmlh9:/image.ppm ./image07161310.ppm
+tar: Removing leading `/' from member names
 
