@@ -1,0 +1,462 @@
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>gcloud container clusters get-credentials cluster-1 --zone asia-northeast1-a --project seminara
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for cluster-1.
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl get nodes
+NAME                                       STATUS   ROLES    AGE     VERSION
+gke-cluster-1-default-pool-31d2713c-0lln   Ready    <none>   56m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-1x8m   Ready    <none>   56m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-21nn   Ready    <none>   56m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-2n13   Ready    <none>   74m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-3mhr   Ready    <none>   56m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-8dmc   Ready    <none>   56m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-b3nw   Ready    <none>   56m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-bb94   Ready    <none>   56m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-f0qj   Ready    <none>   56m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-g710   Ready    <none>   74m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-jqw3   Ready    <none>   60m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-m03x   Ready    <none>   53m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-mjrn   Ready    <none>   56m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-mwbn   Ready    <none>   60m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-plth   Ready    <none>   4h18m   v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-q93t   Ready    <none>   4h18m   v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-qc1z   Ready    <none>   74m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-qrl5   Ready    <none>   4h18m   v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-r78f   Ready    <none>   60m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-s99n   Ready    <none>   56m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-tdn6   Ready    <none>   4h18m   v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-wcl2   Ready    <none>   56m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-x4qp   Ready    <none>   60m     v1.29.5-gke.1091002
+gke-cluster-1-default-pool-31d2713c-z393   Ready    <none>   4h18m   v1.29.5-gke.1091002
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl apply -f consumer-deployment.yaml
+deployment.apps/consumer created
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl get pods
+NAME                        READY   STATUS              RESTARTS   AGE
+consumer-5c7fc9665b-26rsj   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-2nw7l   0/1     ContainerCreating   0          3s
+consumer-5c7fc9665b-2zdqj   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-42vn6   0/1     ContainerCreating   0          1s
+consumer-5c7fc9665b-44dmv   0/1     ContainerCreating   0          3s
+consumer-5c7fc9665b-66xvw   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-69bjc   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-6dkc5   0/1     ContainerCreating   0          3s
+consumer-5c7fc9665b-6j9vg   0/1     ContainerCreating   0          1s
+consumer-5c7fc9665b-6snlv   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-72z5n   0/1     ContainerCreating   0          1s
+consumer-5c7fc9665b-7jt6w   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-7ppzc   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-7wqd7   0/1     ContainerCreating   0          1s
+consumer-5c7fc9665b-8b4sj   0/1     ContainerCreating   0          1s
+consumer-5c7fc9665b-8jb5r   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-95nfb   0/1     ContainerCreating   0          1s
+consumer-5c7fc9665b-9swjp   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-9vgnq   0/1     ContainerCreating   0          3s
+consumer-5c7fc9665b-9z67x   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-dlrpf   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-fs55n   0/1     ContainerCreating   0          3s
+consumer-5c7fc9665b-gf6gx   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-gf7rc   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-gjkrt   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-gvbvv   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-jfxpx   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-jhl2m   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-k5pg2   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-kfl58   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-kwkrs   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-ltxxb   0/1     ContainerCreating   0          3s
+consumer-5c7fc9665b-lvqxp   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-mhlcs   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-nwczc   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-pfnks   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-qfblp   0/1     ContainerCreating   0          3s
+consumer-5c7fc9665b-qgrkt   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-qjs5r   0/1     ContainerCreating   0          1s
+consumer-5c7fc9665b-rzcp5   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-s28xq   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-s4qmk   0/1     ContainerCreating   0          1s
+consumer-5c7fc9665b-sf924   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-sl95g   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-td7pb   0/1     ContainerCreating   0          3s
+consumer-5c7fc9665b-v6v4f   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-x9cqs   0/1     ContainerCreating   0          2s
+consumer-5c7fc9665b-z5sb6   0/1     ContainerCreating   0          3s
+consumer-5c7fc9665b-z947f   0/1     ContainerCreating   0          3s
+consumer-5c7fc9665b-zjqnx   0/1     ContainerCreating   0          2s
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl get pods
+NAME                        READY   STATUS              RESTARTS   AGE
+consumer-5c7fc9665b-26rsj   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-2nw7l   0/1     ContainerCreating   0          6s
+consumer-5c7fc9665b-2zdqj   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-42vn6   0/1     ContainerCreating   0          4s
+consumer-5c7fc9665b-44dmv   0/1     ContainerCreating   0          6s
+consumer-5c7fc9665b-66xvw   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-69bjc   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-6dkc5   0/1     ContainerCreating   0          6s
+consumer-5c7fc9665b-6j9vg   0/1     ContainerCreating   0          4s
+consumer-5c7fc9665b-6snlv   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-72z5n   0/1     ContainerCreating   0          4s
+consumer-5c7fc9665b-7jt6w   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-7ppzc   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-7wqd7   0/1     ContainerCreating   0          4s
+consumer-5c7fc9665b-8b4sj   0/1     ContainerCreating   0          4s
+consumer-5c7fc9665b-8jb5r   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-95nfb   0/1     ContainerCreating   0          4s
+consumer-5c7fc9665b-9swjp   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-9vgnq   0/1     ContainerCreating   0          6s
+consumer-5c7fc9665b-9z67x   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-dlrpf   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-fs55n   0/1     ContainerCreating   0          6s
+consumer-5c7fc9665b-gf6gx   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-gf7rc   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-gjkrt   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-gvbvv   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-jfxpx   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-jhl2m   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-k5pg2   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-kfl58   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-kwkrs   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-ltxxb   0/1     ContainerCreating   0          6s
+consumer-5c7fc9665b-lvqxp   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-mhlcs   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-nwczc   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-pfnks   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-qfblp   0/1     ContainerCreating   0          6s
+consumer-5c7fc9665b-qgrkt   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-qjs5r   0/1     ContainerCreating   0          4s
+consumer-5c7fc9665b-rzcp5   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-s28xq   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-s4qmk   0/1     ContainerCreating   0          4s
+consumer-5c7fc9665b-sf924   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-sl95g   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-td7pb   0/1     ContainerCreating   0          6s
+consumer-5c7fc9665b-v6v4f   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-x9cqs   0/1     ContainerCreating   0          5s
+consumer-5c7fc9665b-z5sb6   0/1     ContainerCreating   0          6s
+consumer-5c7fc9665b-z947f   0/1     ContainerCreating   0          6s
+consumer-5c7fc9665b-zjqnx   0/1     ContainerCreating   0          5s
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl get pods
+NAME                        READY   STATUS              RESTARTS   AGE
+consumer-5c7fc9665b-26rsj   1/1     Running             0          10s
+consumer-5c7fc9665b-2nw7l   1/1     Running             0          11s
+consumer-5c7fc9665b-2zdqj   1/1     Running             0          10s
+consumer-5c7fc9665b-42vn6   1/1     Running             0          9s
+consumer-5c7fc9665b-44dmv   1/1     Running             0          11s
+consumer-5c7fc9665b-66xvw   1/1     Running             0          10s
+consumer-5c7fc9665b-69bjc   1/1     Running             0          10s
+consumer-5c7fc9665b-6dkc5   1/1     Running             0          11s
+consumer-5c7fc9665b-6j9vg   1/1     Running             0          9s
+consumer-5c7fc9665b-6snlv   1/1     Running             0          10s
+consumer-5c7fc9665b-72z5n   1/1     Running             0          9s
+consumer-5c7fc9665b-7jt6w   1/1     Running             0          10s
+consumer-5c7fc9665b-7ppzc   1/1     Running             0          10s
+consumer-5c7fc9665b-7wqd7   1/1     Running             0          9s
+consumer-5c7fc9665b-8b4sj   1/1     Running             0          9s
+consumer-5c7fc9665b-8jb5r   1/1     Running             0          10s
+consumer-5c7fc9665b-95nfb   1/1     Running             0          9s
+consumer-5c7fc9665b-9swjp   1/1     Running             0          10s
+consumer-5c7fc9665b-9vgnq   1/1     Running             0          11s
+consumer-5c7fc9665b-9z67x   1/1     Running             0          10s
+consumer-5c7fc9665b-dlrpf   1/1     Running             0          10s
+consumer-5c7fc9665b-fs55n   1/1     Running             0          11s
+consumer-5c7fc9665b-gf6gx   0/1     ContainerCreating   0          10s
+consumer-5c7fc9665b-gf7rc   1/1     Running             0          10s
+consumer-5c7fc9665b-gjkrt   1/1     Running             0          10s
+consumer-5c7fc9665b-gvbvv   1/1     Running             0          10s
+consumer-5c7fc9665b-jfxpx   1/1     Running             0          10s
+consumer-5c7fc9665b-jhl2m   1/1     Running             0          10s
+consumer-5c7fc9665b-k5pg2   1/1     Running             0          10s
+consumer-5c7fc9665b-kfl58   1/1     Running             0          10s
+consumer-5c7fc9665b-kwkrs   1/1     Running             0          10s
+consumer-5c7fc9665b-ltxxb   1/1     Running             0          11s
+consumer-5c7fc9665b-lvqxp   1/1     Running             0          10s
+consumer-5c7fc9665b-mhlcs   1/1     Running             0          10s
+consumer-5c7fc9665b-nwczc   1/1     Running             0          10s
+consumer-5c7fc9665b-pfnks   1/1     Running             0          10s
+consumer-5c7fc9665b-qfblp   1/1     Running             0          11s
+consumer-5c7fc9665b-qgrkt   1/1     Running             0          10s
+consumer-5c7fc9665b-qjs5r   1/1     Running             0          9s
+consumer-5c7fc9665b-rzcp5   1/1     Running             0          10s
+consumer-5c7fc9665b-s28xq   0/1     ContainerCreating   0          10s
+consumer-5c7fc9665b-s4qmk   0/1     ContainerCreating   0          9s
+consumer-5c7fc9665b-sf924   1/1     Running             0          10s
+consumer-5c7fc9665b-sl95g   1/1     Running             0          10s
+consumer-5c7fc9665b-td7pb   1/1     Running             0          11s
+consumer-5c7fc9665b-v6v4f   1/1     Running             0          10s
+consumer-5c7fc9665b-x9cqs   1/1     Running             0          10s
+consumer-5c7fc9665b-z5sb6   1/1     Running             0          11s
+consumer-5c7fc9665b-z947f   1/1     Running             0          11s
+consumer-5c7fc9665b-zjqnx   1/1     Running             0          10s
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl get pods
+NAME                        READY   STATUS    RESTARTS   AGE
+consumer-5c7fc9665b-26rsj   1/1     Running   0          14s
+consumer-5c7fc9665b-2nw7l   1/1     Running   0          15s
+consumer-5c7fc9665b-2zdqj   1/1     Running   0          14s
+consumer-5c7fc9665b-42vn6   1/1     Running   0          13s
+consumer-5c7fc9665b-44dmv   1/1     Running   0          15s
+consumer-5c7fc9665b-66xvw   1/1     Running   0          14s
+consumer-5c7fc9665b-69bjc   1/1     Running   0          14s
+consumer-5c7fc9665b-6dkc5   1/1     Running   0          15s
+consumer-5c7fc9665b-6j9vg   1/1     Running   0          13s
+consumer-5c7fc9665b-6snlv   1/1     Running   0          14s
+consumer-5c7fc9665b-72z5n   1/1     Running   0          13s
+consumer-5c7fc9665b-7jt6w   1/1     Running   0          14s
+consumer-5c7fc9665b-7ppzc   1/1     Running   0          14s
+consumer-5c7fc9665b-7wqd7   1/1     Running   0          13s
+consumer-5c7fc9665b-8b4sj   1/1     Running   0          13s
+consumer-5c7fc9665b-8jb5r   1/1     Running   0          14s
+consumer-5c7fc9665b-95nfb   1/1     Running   0          13s
+consumer-5c7fc9665b-9swjp   1/1     Running   0          14s
+consumer-5c7fc9665b-9vgnq   1/1     Running   0          15s
+consumer-5c7fc9665b-9z67x   1/1     Running   0          14s
+consumer-5c7fc9665b-dlrpf   1/1     Running   0          14s
+consumer-5c7fc9665b-fs55n   1/1     Running   0          15s
+consumer-5c7fc9665b-gf6gx   1/1     Running   0          14s
+consumer-5c7fc9665b-gf7rc   1/1     Running   0          14s
+consumer-5c7fc9665b-gjkrt   1/1     Running   0          14s
+consumer-5c7fc9665b-gvbvv   1/1     Running   0          14s
+consumer-5c7fc9665b-jfxpx   1/1     Running   0          14s
+consumer-5c7fc9665b-jhl2m   1/1     Running   0          14s
+consumer-5c7fc9665b-k5pg2   1/1     Running   0          14s
+consumer-5c7fc9665b-kfl58   1/1     Running   0          14s
+consumer-5c7fc9665b-kwkrs   1/1     Running   0          14s
+consumer-5c7fc9665b-ltxxb   1/1     Running   0          15s
+consumer-5c7fc9665b-lvqxp   1/1     Running   0          14s
+consumer-5c7fc9665b-mhlcs   1/1     Running   0          14s
+consumer-5c7fc9665b-nwczc   1/1     Running   0          14s
+consumer-5c7fc9665b-pfnks   1/1     Running   0          14s
+consumer-5c7fc9665b-qfblp   1/1     Running   0          15s
+consumer-5c7fc9665b-qgrkt   1/1     Running   0          14s
+consumer-5c7fc9665b-qjs5r   1/1     Running   0          13s
+consumer-5c7fc9665b-rzcp5   1/1     Running   0          14s
+consumer-5c7fc9665b-s28xq   1/1     Running   0          14s
+consumer-5c7fc9665b-s4qmk   1/1     Running   0          13s
+consumer-5c7fc9665b-sf924   1/1     Running   0          14s
+consumer-5c7fc9665b-sl95g   1/1     Running   0          14s
+consumer-5c7fc9665b-td7pb   1/1     Running   0          15s
+consumer-5c7fc9665b-v6v4f   1/1     Running   0          14s
+consumer-5c7fc9665b-x9cqs   1/1     Running   0          14s
+consumer-5c7fc9665b-z5sb6   1/1     Running   0          15s
+consumer-5c7fc9665b-z947f   1/1     Running   0          15s
+consumer-5c7fc9665b-zjqnx   1/1     Running   0          14s
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl apply -f producer-deployment.yaml
+deployment.apps/producer created
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl apply -f producer-service.yaml
+service/producer created
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl get pods
+NAME                        READY   STATUS    RESTARTS   AGE
+consumer-5c7fc9665b-26rsj   1/1     Running   0          26s
+consumer-5c7fc9665b-2nw7l   1/1     Running   0          27s
+consumer-5c7fc9665b-2zdqj   1/1     Running   0          26s
+consumer-5c7fc9665b-42vn6   1/1     Running   0          25s
+consumer-5c7fc9665b-44dmv   1/1     Running   0          27s
+consumer-5c7fc9665b-66xvw   1/1     Running   0          26s
+consumer-5c7fc9665b-69bjc   1/1     Running   0          26s
+consumer-5c7fc9665b-6dkc5   1/1     Running   0          27s
+consumer-5c7fc9665b-6j9vg   1/1     Running   0          25s
+consumer-5c7fc9665b-6snlv   1/1     Running   0          26s
+consumer-5c7fc9665b-72z5n   1/1     Running   0          25s
+consumer-5c7fc9665b-7jt6w   1/1     Running   0          26s
+consumer-5c7fc9665b-7ppzc   1/1     Running   0          26s
+consumer-5c7fc9665b-7wqd7   1/1     Running   0          25s
+consumer-5c7fc9665b-8b4sj   1/1     Running   0          25s
+consumer-5c7fc9665b-8jb5r   1/1     Running   0          26s
+consumer-5c7fc9665b-95nfb   1/1     Running   0          25s
+consumer-5c7fc9665b-9swjp   1/1     Running   0          26s
+consumer-5c7fc9665b-9vgnq   1/1     Running   0          27s
+consumer-5c7fc9665b-9z67x   1/1     Running   0          26s
+consumer-5c7fc9665b-dlrpf   1/1     Running   0          26s
+consumer-5c7fc9665b-fs55n   1/1     Running   0          27s
+consumer-5c7fc9665b-gf6gx   1/1     Running   0          26s
+consumer-5c7fc9665b-gf7rc   1/1     Running   0          26s
+consumer-5c7fc9665b-gjkrt   1/1     Running   0          26s
+consumer-5c7fc9665b-gvbvv   1/1     Running   0          26s
+consumer-5c7fc9665b-jfxpx   1/1     Running   0          26s
+consumer-5c7fc9665b-jhl2m   1/1     Running   0          26s
+consumer-5c7fc9665b-k5pg2   1/1     Running   0          26s
+consumer-5c7fc9665b-kfl58   1/1     Running   0          26s
+consumer-5c7fc9665b-kwkrs   1/1     Running   0          26s
+consumer-5c7fc9665b-ltxxb   1/1     Running   0          27s
+consumer-5c7fc9665b-lvqxp   1/1     Running   0          26s
+consumer-5c7fc9665b-mhlcs   1/1     Running   0          26s
+consumer-5c7fc9665b-nwczc   1/1     Running   0          26s
+consumer-5c7fc9665b-pfnks   1/1     Running   0          26s
+consumer-5c7fc9665b-qfblp   1/1     Running   0          27s
+consumer-5c7fc9665b-qgrkt   1/1     Running   0          26s
+consumer-5c7fc9665b-qjs5r   1/1     Running   0          25s
+consumer-5c7fc9665b-rzcp5   1/1     Running   0          26s
+consumer-5c7fc9665b-s28xq   1/1     Running   0          26s
+consumer-5c7fc9665b-s4qmk   1/1     Running   0          25s
+consumer-5c7fc9665b-sf924   1/1     Running   0          26s
+consumer-5c7fc9665b-sl95g   1/1     Running   0          26s
+consumer-5c7fc9665b-td7pb   1/1     Running   0          27s
+consumer-5c7fc9665b-v6v4f   1/1     Running   0          26s
+consumer-5c7fc9665b-x9cqs   1/1     Running   0          26s
+consumer-5c7fc9665b-z5sb6   1/1     Running   0          27s
+consumer-5c7fc9665b-z947f   1/1     Running   0          27s
+consumer-5c7fc9665b-zjqnx   1/1     Running   0          26s
+producer-7577bf9f46-nd7f2   1/1     Running   0          6s
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl exec -it producer-7577bf9f46-nd7f2 -- ./bin/bash
+root@producer-7577bf9f46-nd7f2:/# ls
+bin  boot  dev  etc  home  lib  lib64  log2.txt  media  mnt  opt  proc  producer.py  root  run  sbin  srv  sys  tmp  usr  var
+root@producer-7577bf9f46-nd7f2:/# cat log.txt
+receive row :7
+receive row :6
+receive row :15
+receive row :28
+receive row :41
+root@producer-7577bf9f46-nd7f2:/# exit
+exit
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl logs -f producer-7577bf9f46-nd7f2
+execution time 387.722021818161
+^C
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl exec -it consumer-5c7fc9665b-zjqnx -- ./bin/bash
+root@consumer-5c7fc9665b-zjqnx:/# cat consumer.py
+import socket
+import struct
+import time
+import ppm_maker
+
+"""
+ここ大域変数
+sampleとsupersamples
+"""
+width = 640
+height = 480
+samples = 1000
+supersamples = 2
+
+def main():
+        producer_ip = 'producer'#producer
+        producer_port = 8081
+        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        retry_interval = 1  # 再試行までの待機時間（秒）
+        retry_num = 0
+
+
+        while True:
+                try:
+                        if retry_num == 100:
+                                break
+                        client.connect((producer_ip, producer_port))
+
+                        while True:
+                                client.sendall(b'R')
+                                length = struct.unpack('!I', client.recv(4))[0]  # データの長さを受信
+                                recv_data = client.recv(length).decode()
+                                if recv_data == 'F':
+                                        with open("log.txt",'a') as f:
+                                                f.write("receive finish signal\n")
+                                        print("receive finish signal")
+                                        break
+                                row = int(recv_data)
+                                with open("log.txt",'a') as f:
+                                        f.write(f"row: {row}")
+                                print(f"row:{row}")
+                                """
+                                try:
+                                        result = ppm_maker.get_ppm_line(width,height,samples,supersamples,row)
+                                except UnicodeDecodeError:
+                                        pass
+                                """
+
+                                send_data = f'{row},{ppm_maker.get_ppm_line(width,height,samples,supersamples,row)}'.encode()
+                                # while True:
+                                #       try:
+                                #               send_data = f'{row},{ppm_maker.get_ppm_line(width,height,samples,supersamples,row)}'.encode()
+                                #               break
+                                #       except Exception as e:
+                                #               print(f"error occurred row {row}: {e}, retrying...")
+
+                                client.sendall(b'S')
+                                client.sendall(struct.pack('!I', len(send_data)) + send_data) #送信
+                                with open("log.txt",'a') as f:
+                                        f.write(f"Sent result: row={row}\n")
+                                print(f"Sent result: row={row}")
+                        break
+
+
+                except (socket.error, OSError) as e:
+                        print(f"Failed to connect to the producer: {e}")
+                        print(f"Retrying in {retry_interval} seconds...")
+                        time.sleep(retry_interval)  # 再試行まで待機
+                finally:
+                        retry_num += 1
+                        client.close()  # 再試行のためにソケットを閉じる
+                        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # 新しいソケットを作成
+
+if __name__ == '__main__':
+        main()root@consumer-5c7fc9665b-zjqnx:/# exit
+exit
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl cp producer-7577bf9f46-nd7f2:/image.ppm ./image1000.ppm
+tar: Removing leading `/' from member names
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>kubectl delete all --all
+pod "consumer-5c7fc9665b-26rsj" deleted
+pod "consumer-5c7fc9665b-2nw7l" deleted
+pod "consumer-5c7fc9665b-2zdqj" deleted
+pod "consumer-5c7fc9665b-42vn6" deleted
+pod "consumer-5c7fc9665b-44dmv" deleted
+pod "consumer-5c7fc9665b-66xvw" deleted
+pod "consumer-5c7fc9665b-69bjc" deleted
+pod "consumer-5c7fc9665b-6dkc5" deleted
+pod "consumer-5c7fc9665b-6j9vg" deleted
+pod "consumer-5c7fc9665b-6snlv" deleted
+pod "consumer-5c7fc9665b-72z5n" deleted
+pod "consumer-5c7fc9665b-7jt6w" deleted
+pod "consumer-5c7fc9665b-7ppzc" deleted
+pod "consumer-5c7fc9665b-7wqd7" deleted
+pod "consumer-5c7fc9665b-8b4sj" deleted
+pod "consumer-5c7fc9665b-8jb5r" deleted
+pod "consumer-5c7fc9665b-95nfb" deleted
+pod "consumer-5c7fc9665b-9swjp" deleted
+pod "consumer-5c7fc9665b-9vgnq" deleted
+pod "consumer-5c7fc9665b-9z67x" deleted
+pod "consumer-5c7fc9665b-dlrpf" deleted
+pod "consumer-5c7fc9665b-fs55n" deleted
+pod "consumer-5c7fc9665b-gf6gx" deleted
+pod "consumer-5c7fc9665b-gf7rc" deleted
+pod "consumer-5c7fc9665b-gjkrt" deleted
+pod "consumer-5c7fc9665b-gvbvv" deleted
+pod "consumer-5c7fc9665b-jfxpx" deleted
+pod "consumer-5c7fc9665b-jhl2m" deleted
+pod "consumer-5c7fc9665b-k5pg2" deleted
+pod "consumer-5c7fc9665b-kfl58" deleted
+pod "consumer-5c7fc9665b-kwkrs" deleted
+pod "consumer-5c7fc9665b-ltxxb" deleted
+pod "consumer-5c7fc9665b-lvqxp" deleted
+pod "consumer-5c7fc9665b-mhlcs" deleted
+pod "consumer-5c7fc9665b-nwczc" deleted
+pod "consumer-5c7fc9665b-pfnks" deleted
+pod "consumer-5c7fc9665b-qfblp" deleted
+pod "consumer-5c7fc9665b-qgrkt" deleted
+pod "consumer-5c7fc9665b-qjs5r" deleted
+pod "consumer-5c7fc9665b-rzcp5" deleted
+pod "consumer-5c7fc9665b-s28xq" deleted
+pod "consumer-5c7fc9665b-s4qmk" deleted
+pod "consumer-5c7fc9665b-sf924" deleted
+pod "consumer-5c7fc9665b-sl95g" deleted
+pod "consumer-5c7fc9665b-td7pb" deleted
+pod "consumer-5c7fc9665b-v6v4f" deleted
+pod "consumer-5c7fc9665b-x9cqs" deleted
+pod "consumer-5c7fc9665b-z5sb6" deleted
+pod "consumer-5c7fc9665b-z947f" deleted
+pod "consumer-5c7fc9665b-zjqnx" deleted
+pod "producer-7577bf9f46-nd7f2" deleted
+service "kubernetes" deleted
+service "producer" deleted
+deployment.apps "consumer" deleted
+deployment.apps "producer" deleted
+replicaset.apps "producer-7577bf9f46" deleted
+
+C:\Users\ryota\AppData\Local\Google\Cloud SDK\seminarA\ray-tracing>
